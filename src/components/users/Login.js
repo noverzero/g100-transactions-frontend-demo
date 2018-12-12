@@ -15,6 +15,10 @@ class Login extends Component {
     submitLogin(e){
         e.preventDefault();
         console.log(this.state);
+        this.props.userLogin(this.state.user).then(()=>{
+            if(this.props.user.email)
+                this.props.history.push('/transactions');
+        })
     }
 
     updateFormField(e){
@@ -38,5 +42,5 @@ class Login extends Component {
         );
     }
 }
-
-export default withRouter(connect(null, { userLogin })(Login));
+const mapStateToProps = ({ userReducer }) => ({user: userReducer.user});
+export default withRouter(connect(mapStateToProps, { userLogin })(Login));

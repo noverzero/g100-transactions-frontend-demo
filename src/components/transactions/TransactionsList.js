@@ -42,13 +42,13 @@ class TransactionsList extends Component {
     render() {
         return (
             <div>
-                <h3>Welcome </h3>
+                <h3>Welcome {this.props.user.email}</h3>
                 {this.renderData()}
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ transactions, userReducer }) => ({transactions})
+const mapStateToProps = ({ transactions, userReducer }) => ({transactions, user: userReducer.user})
 
 export default withRouter(connect(mapStateToProps, { getAllTransactions })(TransactionsList));

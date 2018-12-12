@@ -14,6 +14,9 @@ class Register extends Component {
   submitRegister(e){
       e.preventDefault();
       console.log(this.state);
+      this.props.userRegister(this.state.user).then(()=>{
+          this.props.history.push('/');
+      });
   }
 
   updateFormField(e){
