@@ -10,7 +10,8 @@ class TransactionsList extends Component {
             type: '',
             amount: '',
             business_name: ''
-        }
+        },
+        page: 1
     }
     componentDidMount(){
         this.props.getAllTransactions();
@@ -70,8 +71,33 @@ class TransactionsList extends Component {
 
         this.props.deleteTransaction(id);
     }
+
+    isRequesting = false
+
+    lazyLoad = () => {
+        if(this.isRequesting)
+                return;
+        this.isRequesting = true;
+        console.log(this.state.page);
+        this.props.getAllTransactions(this.state.page + 1).then(()=>{
+
+            this.isRequesting = false;
+            this.setState({
+                page: this.state.page + 1
+            });
+        })
+    }
+
+
     render() {
         // this.updateFormField = this.updateFormField.bind(this);
+
+        window.addEventListener('scroll', ()=>{
+            console.log(window.pageYOffset, document.body.scrollHeight - window.screen.height);
+            if(document.body.scrollHeight - window.screen.height - 600 < window.pageYOffset){
+                this.lazyLoad();
+            }
+        })
         return (
             <div>
                 <h3>Welcome {this.props.user.email}</h3>

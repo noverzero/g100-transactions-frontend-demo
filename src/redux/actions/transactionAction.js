@@ -4,9 +4,9 @@ import {
 } from "../types";
 import axios from "../../axios";
 
-export const getAllTransactions = () => dispatch => {
+export const getAllTransactions = (page = 1) => dispatch => {
 
-    return axios.get('/transactions')
+    return axios.get('/transactions?page='+page)
         .then((data)=>{
             console.log(data);
             dispatch({
@@ -26,6 +26,7 @@ export const createTransaction = (transaction) => dispatch => {
                 type: CREATE_TRANSACTION_SUCCESS,
                 payload: data.data
             })
+
         }).catch(()=>{
             dispatch({
                 type: ERROR_MESSAGE,

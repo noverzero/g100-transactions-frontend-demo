@@ -41,9 +41,9 @@ export const verifyUser = () => dispatch => {
                 payload: data.data
             })
         }).catch(err=>{
-            dispatch({
-                type: ERROR_MESSAGE,
-                payload: err.response.data.message
-            })
+            // dispatch({
+            //     type: ERROR_MESSAGE,
+            //     payload: err
+            // })
         })
 }

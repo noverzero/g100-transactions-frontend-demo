@@ -4,7 +4,7 @@ const initialState = [];
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_TRANSACTION_SUCCESS:
-            return action.payload;
+            return [...state, ...action.payload];
         case CREATE_TRANSACTION_SUCCESS:
             return [action.payload, ...state];
         case DELETE_TRANSACTION_SUCCESS:
