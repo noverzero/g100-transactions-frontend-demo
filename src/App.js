@@ -7,6 +7,7 @@ import TransactionsList from "./components/transactions/TransactionsList";
 import MessageList from "./components/messages/MessageList";
 import { verifyUser } from "./redux/actions/userAction";
 import { connect } from 'react-redux';
+import EditTransaction from "./components/transactions/EditTransaction";
 
 class App extends Component {
 
@@ -23,12 +24,14 @@ class App extends Component {
   render() {
     return (
         <div>
+            <MessageList></MessageList>
             <Switch>
                 <Route exact path='/' component={Login}/>
                 <Route path='/register' component={Register}/>
                 <Route exact path='/transactions' component={TransactionsList}/>
+                <Route path='/transactions/:id' component={EditTransaction}/>
             </Switch>
-            <MessageList></MessageList>
+
         </div>
     );
   }
